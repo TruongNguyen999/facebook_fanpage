@@ -1,0 +1,13 @@
+<script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+<script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+
+<!-- Custom scripts FOR all pages-->
+<script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
+<script>
+    setTimeout(() => {
+        document.getElementById('alert').style.display = 'none';
+    }, 3000);
+</script>
