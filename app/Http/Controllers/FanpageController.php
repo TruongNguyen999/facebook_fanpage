@@ -12,7 +12,7 @@ class FanpageController extends Controller
 {
     public function index()
     {
-        $response = Http::withToken('EAAEIucK7SxgBAKR9TNmalie7FDNnvZCZAqBk7fmX7yznGymYCFVa2gZCYmmKD6UkUgAvpOqWQZCUweAJSt6dZAZAES2eEd4qGdMY4v4PjKUl4ryRkIH3YmLvqmofE9jInZB10KFADig8g7brZAiZA2NPPCfqjpbdq31UDHY7EW9RGyOVVZBVjbQaZBdkxkZA2UD2WxEZD')->get('https://graph.facebook.com/me/accounts')->json();
+        $response = Http::withToken('EAADFEiUiq8IBAAF5pgAq4DpZChZCwtewEYsasTLUz95TVjHW8iRbYaOYiZAxLta1rYTrkWitrjZAWDMzkDWP76ev00dhB0HfTR79euxZBFEfolpv6MohK2r05AcjvdO2Cu5Kmw9lcBIWPbyAsGWUtcSoXq83tWDVa2Vs0TgGIEzETKxroLygd5u9m4uTuvemgjH3AtIlIZCgZDZD')->get('https://graph.facebook.com/me/accounts')->json();
         $data = $response['data'];
         return view('test', compact('data'));
     }
