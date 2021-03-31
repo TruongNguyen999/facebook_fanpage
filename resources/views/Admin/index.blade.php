@@ -23,11 +23,11 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <p>
                         @if(isset($status['message']))
-                        {{$status['message']}}
+                        {!! nl2br(e($status['message'])) !!}
                         @elseif(isset($status['attachments']['data'][0]['title']))
-                        {{$status['attachments']['data'][0]['title']}}
+                        {!! nl2br(e($status['attachments']['data'][0]['title'])) !!}
                         @elseif(isset($status['attachments']['data'][0]['description']))
-                        {{$status['attachments']['data'][0]['description']}}
+                        {!! nl2br(e($status['attachments']['data'][0]['description'])) !!}
                         @endif
                     </p>
                 </div>
