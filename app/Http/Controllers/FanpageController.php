@@ -55,12 +55,12 @@ class FanpageController extends Controller
             'default_graph_version' => 'v2.10',
         ]);
 
-
         if (isset($path)) {
             try {
-                $objPHPExcel = PHPExcel_IOFactory::load(base_path('storage/app/' . $path));
+                $objPHPExcel = PHPExcel_IOFactory::load(public_path('storage/app/' . $path));
                 $provinceSheet = $objPHPExcel->setActiveSheetIndex(0);
-
+                // RyjfrPvdL3S3OgPsNbR44k0ja0wxFlUWnxJWuiFi.xlsx
+                // KmZYMeQPZb3DNFCNCydOaxXfUreF1LHNuX0ykgsa.xlsx
                 $index = 2;
                 $idExcel = array();
                 $statusExcel = array();
@@ -78,11 +78,6 @@ class FanpageController extends Controller
                         foreach ($fanpage as $access_token) {
                             for ($i = 0; $i < count($idExcel); $i++) {
 
-                                // $param = array(
-                                //     'message' => $statusExcel[$i],
-                                //     'link' => $linkExcel[$i]
-                                // );
-
                                 $param_photo = array(
                                     'message' => $statusExcel[$i],
                                     'link' => $linkExcel[$i],
@@ -90,7 +85,6 @@ class FanpageController extends Controller
                                 );
 
                                 try {
-                                    // $fb->post('/me/feed', $param, $access_token);
                                     $fb->post('/me/photos', $param_photo, $access_token);
                                 } catch (\Facebook\Exceptions\FacebookResponseException $e) {
                                     echo 'Graph returned an error: ' . $e->getMessage();
@@ -114,15 +108,8 @@ class FanpageController extends Controller
                                     'link' => $linkExcel[$i]
                                 );
 
-                                // $param_photo = array(
-                                //     'message' => $statusExcel[$i],
-                                //     'link' => $linkExcel[$i],
-                                //     'source' => $fb->fileToUpload($img)
-                                // );
-
                                 try {
                                     $fb->post('/me/feed', $param, $access_token);
-                                    // $fb->post('/me/photos', $param_photo, $access_token);
                                 } catch (\Facebook\Exceptions\FacebookResponseException $e) {
                                     echo 'Graph returned an error: ' . $e->getMessage();
                                     exit;
@@ -143,10 +130,6 @@ class FanpageController extends Controller
             if (isset($status)) {
                 if (isset($link)) {
                     if (isset($img)) {
-                        // $param = array(
-                        //     'message' => $status,
-                        //     'link' => $link
-                        // );
 
                         $param_photo = array(
                             'message' => $status,
@@ -157,7 +140,6 @@ class FanpageController extends Controller
                         if (isset($fanpage)) {
                             foreach ($fanpage as $access_token) {
                                 try {
-                                    // $fb->post('/me/feed', $param, $access_token);
                                     $fb->post('/me/photos', $param_photo, $access_token);
                                 } catch (\Facebook\Exceptions\FacebookResponseException $e) {
                                     echo 'Graph returned an error: ' . $e->getMessage();
@@ -176,17 +158,10 @@ class FanpageController extends Controller
                             'link' => $link
                         );
 
-                        // $param_photo = array(
-                        //     'message' => $status,
-                        //     'link' => $link,
-                        //     'source' => $fb->fileToUpload($images)
-                        // );
-
                         if (isset($fanpage)) {
                             foreach ($fanpage as $access_token) {
                                 try {
                                     $fb->post('/me/feed', $param, $access_token);
-                                    // $fb->post('/me/photos', $param_photo, $access_token);
                                 } catch (\Facebook\Exceptions\FacebookResponseException $e) {
                                     echo 'Graph returned an error: ' . $e->getMessage();
                                     exit;
@@ -200,24 +175,48 @@ class FanpageController extends Controller
                         }
                     }
                 } else {
-                    $param = array(
-                        'message' => $status
-                    );
+                    if (isset($img)) {
 
-                    if (isset($fanpage)) {
-                        foreach ($fanpage as $access_token) {
-                            try {
-                                $fb->post('/me/feed', $param, $access_token);
-                            } catch (\Facebook\Exceptions\FacebookResponseException $e) {
-                                echo 'Graph returned an error: ' . $e->getMessage();
-                                exit;
-                            } catch (\Facebook\Exceptions\FacebookSDKException $e) {
-                                echo 'Facebook SDK returned an error: ' . $e->getMessage();
-                                exit;
+                        $param_photo = array(
+                            'message' => $status,
+                            'source' => $fb->fileToUpload($images)
+                        );
+
+                        if (isset($fanpage)) {
+                            foreach ($fanpage as $access_token) {
+                                try {
+                                    $fb->post('/me/photos', $param_photo, $access_token);
+                                } catch (\Facebook\Exceptions\FacebookResponseException $e) {
+                                    echo 'Graph returned an error: ' . $e->getMessage();
+                                    exit;
+                                } catch (\Facebook\Exceptions\FacebookSDKException $e) {
+                                    echo 'Facebook SDK returned an error: ' . $e->getMessage();
+                                    exit;
+                                }
                             }
+                        } else {
+                            return redirect('success')->with('error', 'Bạn cần phải chọn fanpage.');
                         }
-                    } else {
-                        return redirect('success')->with('error', 'Bạn cần phải chọn fanpage.');
+                    }else{
+                        $param = array(
+                            'message' => $status,
+                        );
+
+                        if (isset($fanpage)) {
+                            foreach ($fanpage as $access_token) {
+                                try {
+                                    $fb->post('/me/feed', $param, $access_token);
+                                } catch (\Facebook\Exceptions\FacebookResponseException $e) {
+                                    echo 'Graph returned an error: ' . $e->getMessage();
+                                    exit;
+                                } catch (\Facebook\Exceptions\FacebookSDKException $e) {
+                                    echo 'Facebook SDK returned an error: ' . $e->getMessage();
+                                    exit;
+                                }
+                            }
+                        } else {
+                            return redirect('success')->with('error', 'Bạn cần phải chọn fanpage.');
+                        }
                     }
                 }
             } else {
