@@ -45,6 +45,7 @@
 
 <body class="sb-nav-fixed">
     @include('home.layout.header')
+
     <div id="layoutSidenav">
         @include('home.layout.menu')
         <div id="layoutSidenav_content" style="min-height: calc(100vh - 96px);">
@@ -93,6 +94,7 @@
         </div>
     </div>
     </div>
+
     <script src="js/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
     <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="js/scripts.js"></script>

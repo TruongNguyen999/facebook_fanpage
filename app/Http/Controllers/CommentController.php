@@ -5,14 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\View;
 use Facebook\Facebook;
-use phpDocumentor\Reflection\DocBlock\Tags\See;
+use Pusher\Pusher;
 
 class CommentController extends Controller
 {
     public function comment($id)
     {
+        // https://fchat.vn/automation/keyword
         $access_token =  Session::get('fb_access_token');
         $res = Http::withToken($access_token)->get('https://graph.facebook.com/' . $id . '?fields=access_token')->json();
         $endpoint = '?fields=name,picture';
@@ -37,6 +37,8 @@ class CommentController extends Controller
             if (isset($Comments['data'][$i]['comments'])) {
                 if (isset($Comments['data'][$i]['picture'])) {
                     $imgComment = $Comments['data'][$i]['picture'];
+                }else{
+                    $imgComment = '';
                 };
                 $mess = $Comments['data'][$i]['message'];
                 $oke = 0;
@@ -112,7 +114,22 @@ class CommentController extends Controller
             }
         }
 
-        return redirect('success')->with('success', 'Bạn đã trả lời comment thành công.');
+        $options = array(
+            'cluster' => 'ap1',
+            'useTLS' => true
+        );
+
+        $pusher = new Pusher(
+            'deea0e383e7bff3225d2',
+            '690cd5b5ac61468a283b',
+            '1177522',
+            $options
+        );
+
+        $data = ['message' => $request->comment];
+        $pusher->trigger('my-channel', 'my-event', $data);
+
+        return redirect()->back();
     }
     public function delete_comment(Request $request)
     {
@@ -126,7 +143,7 @@ class CommentController extends Controller
         ]);
 
         try {
-            $fb->delete($id,[],$access_token);
+            $fb->delete($id, [], $access_token);
         } catch (\Facebook\Exceptions\FacebookResponseException $e) {
             echo 'Graph returned an error: ' . $e->getMessage();
             exit;
@@ -135,6 +152,6 @@ class CommentController extends Controller
             exit;
         }
 
-        return redirect('success')->with('success', 'Bạn đã Xóa comment thành công.');
+        return redirect()->back();
     }
 }

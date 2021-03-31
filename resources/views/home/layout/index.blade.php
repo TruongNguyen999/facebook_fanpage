@@ -10,7 +10,7 @@
     <title>Dashboard - SB Admin</title>
     <base href="{{asset('')}}">
     <link href="css/styles.css" rel="stylesheet" />
-    <!-- <link href="css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" /> -->
+    <!-- <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
     <script src="js/all.min.js" crossorigin="anonymous"></script>
     @php
     $count_fanpage = Session::get('count_fanpage');
@@ -42,6 +42,12 @@
                             <div>Link</div>
                             <div class="btn btn-mdb-color btn-rounded">
                                 <input type="text" name="link" style="border: none; border-bottom: 1px solid #e06363; width:440px; outline: none">
+                            </div>
+                        </div>
+                        <div class="justify-content mt-4">
+                            <div>Đăng bài theo Excel</div>
+                            <div class="btn btn-mdb-color btn-rounded">
+                                <input type="file" name="excel">
                             </div>
                         </div>
                         <div>
@@ -192,13 +198,15 @@
             @include('home.layout.footer')
         </div>
     </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/pusher.min.js"></script>
+    <script src="js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="js/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
     <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="js/scripts.js"></script>
     <script src="js/Chart.min.js" crossorigin="anonymous"></script>
     <script src="assets/demo/chart-area-demo.js"></script>
     <script src="assets/demo/chart-bar-demo.js"></script>
-    <!-- <script src="js/jquery.dataTables.min.js" crossorigin="anonymous"></script> -->
     <script src="js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
     <script src="assets/demo/datatables-demo.js"></script>
     <script>

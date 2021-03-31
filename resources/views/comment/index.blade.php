@@ -119,7 +119,7 @@
                 <form action="{{url('/postComment')}}" method="POST" role="form" enctype="multipart/form-data">
                     @csrf
                     <div style="display: flex; width: max-content; background:#bdd6b1;padding:7px;border-radius:20px; background:#0000009e">
-                        <input name="comment" type="text" style="margin-right:5px;border: none;outline:none;background:none;color:black" placeholder='gửi tin nhắn ...'>
+                        <input name="comment" type="text" style="margin-right:5px;border: none;outline:none;background:none;color:white" placeholder='gửi tin nhắn ...'>
                         <input name="id" style="display: none;" value="{{$inf['id']}}" />
                         <span href="" style="margin-right: 5px;"><img src="img/smiling.png" alt="Chèn một biểu tượng cảm xúc"></span>
                         <span href="" style="margin-right: 5px;"><img src="img/photo-camera.png" alt="Đính kèm một ảnh hoặc video"></span>
@@ -226,7 +226,7 @@
                 <form action="{{url('/postComment')}}" method="POST" role="form" enctype="multipart/form-data">
                     @csrf
                     <div style="display: flex; width: max-content; background:#bdd6b1;padding:7px;border-radius:20px;background:#0000009e">
-                        <input name="comment" type="text" style="margin-right:5px;border: none;outline:none;background:none;color:black" placeholder='gửi tin nhắn ...'>
+                        <input name="comment" type="text" style="margin-right:5px;border: none;outline:none;background:none;color:white" placeholder='gửi tin nhắn ...'>
                         <input name="id" style="display: none;" value="{{$inf['id']}}" />
                         <span href="" style="margin-right: 5px;"><img src="img/smiling.png" alt="Chèn một biểu tượng cảm xúc"></span>
                         <span href="" style="margin-right: 5px;"><img src="img/photo-camera.png" alt="Đính kèm một ảnh hoặc video"></span>

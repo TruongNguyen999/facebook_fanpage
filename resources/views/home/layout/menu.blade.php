@@ -40,9 +40,13 @@ $inf_fanpage = Session::get('nodefanpage');
                     <div class="sb-nav-link-icon"><i class="fas fa-plus"></i></div>
                     Đăng Bài Mới
                 </a>
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="status_admin">
                     <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                    Tables
+                    Status Người quản trị
+                </a>
+                <a class="nav-link" href="album_admin">
+                    <div class="sb-nav-link-icon"><i class="fas fa-images"></i></div>
+                    Album Ảnh
                 </a>
             </div>
         </div>
