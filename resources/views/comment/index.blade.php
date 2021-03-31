@@ -37,7 +37,7 @@
                     @endif
                 </div>
                 <div class="message-data">
-                    @if(isset($inf['from']))
+                    @if(isset($inf['from']) && isset($inf['admin_creator']))
                     <span class="message-data-name" style="display: flex">
                         <a href="">Thích</a> -
                         <a href="">Trả lời</a> -
