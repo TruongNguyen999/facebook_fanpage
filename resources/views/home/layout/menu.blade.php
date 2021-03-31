@@ -58,7 +58,7 @@ $inf_fanpage = Session::get('nodefanpage');
 </div>
 
 <script>
-    if(window.location.href === 'http://facebook-app01.herokuapp.com/success' || window.location.href === 'http://facebook-app01.herokuapp.com/detail_fanpage/109761181167190' || window.location.href === 'http://facebook-app01.herokuapp.com/detail_fanpage/105047548270434'){
+    if(window.location.href === 'https://localhost:8081/public/success' || window.location.href === 'http://facebook-app01.herokuapp.com/detail_fanpage/109761181167190' || window.location.href === 'http://facebook-app01.herokuapp.com/detail_fanpage/105047548270434'){
         document.getElementById('showPost').style.display = 'flex';
     }
 </script>

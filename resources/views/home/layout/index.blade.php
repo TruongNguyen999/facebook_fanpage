@@ -45,6 +45,12 @@
                             </div>
                         </div>
                         <div class="justify-content mt-4">
+                            <div>Chọn hình ảnh đăng</div>
+                            <div class="btn btn-mdb-color btn-rounded">
+                                <input type="file" name="images-add">
+                            </div>
+                        </div>
+                        <div class="justify-content mt-4">
                             <div>Đăng bài theo Excel</div>
                             <div class="btn btn-mdb-color btn-rounded">
                                 <input type="file" name="excel">

@@ -39,6 +39,7 @@ class FanpageController extends Controller
         $fanpage = $request->fanpage;
         $link = $request->link;
         $excel = $request->file('excel');
+        $images = $request->file('images-add')->getPathname();
 
         if (isset($excel)) {
             $path = Storage::putFile('file', $request->file('excel'));
@@ -71,13 +72,20 @@ class FanpageController extends Controller
                     foreach ($fanpage as $access_token) {
                         for ($i = 0; $i < count($idExcel); $i++) {
 
-                            $param = array(
+                            // $param = array(
+                            //     'message' => $statusExcel[$i],
+                            //     'link' => $linkExcel[$i]
+                            // );
+
+                            $param_photo = array(
                                 'message' => $statusExcel[$i],
-                                'link' => $linkExcel[$i]
+                                'link' => $linkExcel[$i],
+                                'source' => $fb->fileToUpload($images)
                             );
 
                             try {
-                                $fb->post('/me/feed', $param, $access_token);
+                                // $fb->post('/me/feed', $param, $access_token);
+                                $fb->post('/me/photos', $param_photo, $access_token);
                             } catch (\Facebook\Exceptions\FacebookResponseException $e) {
                                 echo 'Graph returned an error: ' . $e->getMessage();
                                 exit;
@@ -96,15 +104,23 @@ class FanpageController extends Controller
         } else {
             if (isset($status)) {
                 if (isset($link)) {
-                    $param = array(
+
+                    // $param = array(
+                    //     'message' => $status,
+                    //     'link' => $link
+                    // );
+
+                    $param_photo = array(
                         'message' => $status,
-                        'link' => $link
+                        'link' => $link,
+                        'source' => $fb->fileToUpload($images)
                     );
 
                     if (isset($fanpage)) {
                         foreach ($fanpage as $access_token) {
                             try {
-                                $fb->post('/me/feed', $param, $access_token);
+                                // $fb->post('/me/feed', $param, $access_token);
+                                $fb->post('/me/photos', $param_photo, $access_token);
                             } catch (\Facebook\Exceptions\FacebookResponseException $e) {
                                 echo 'Graph returned an error: ' . $e->getMessage();
                                 exit;
