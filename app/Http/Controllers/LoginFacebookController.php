@@ -13,8 +13,8 @@ class LoginFacebookController extends Controller
     }
     public function success(){
         $fb = new Facebook([
-            'app_id' => '435930977474330',
-            'app_secret' => '8faf7d2190cc66e016e3c4a07ea6fd54',
+            'app_id' => env('FACEBOOK_APP_ID'),
+            'app_secret' => env('FACEBOOK_APP_SECRET'),
             'default_graph_version' => 'v2.10',
         ]);
 
