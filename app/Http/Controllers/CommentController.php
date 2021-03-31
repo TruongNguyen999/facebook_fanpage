@@ -37,7 +37,7 @@ class CommentController extends Controller
             if (isset($Comments['data'][$i]['comments'])) {
                 if (isset($Comments['data'][$i]['picture'])) {
                     $imgComment = $Comments['data'][$i]['picture'];
-                }else{
+                } else {
                     $imgComment = '';
                 };
                 $mess = $Comments['data'][$i]['message'];
@@ -83,8 +83,8 @@ class CommentController extends Controller
         $comment_default =  Session::get('defaut_Comment');
 
         $fb = new Facebook([
-            'app_id' => '291068905736984',
-            'app_secret' => '6e16c113b403044180cd88649dc7473e',
+            'app_id' => '435930977474330',
+            'app_secret' => '8faf7d2190cc66e016e3c4a07ea6fd54',
             'default_graph_version' => 'v2.10',
         ]);
 
@@ -137,8 +137,8 @@ class CommentController extends Controller
         $access_token =  Session::get('token_comment');
 
         $fb = new Facebook([
-            'app_id' => '291068905736984',
-            'app_secret' => '6e16c113b403044180cd88649dc7473e',
+            'app_id' => '435930977474330',
+            'app_secret' => '8faf7d2190cc66e016e3c4a07ea6fd54',
             'default_graph_version' => 'v2.10',
         ]);
 

@@ -48,9 +48,9 @@ class InboxController extends Controller
         $id_fanpage = Session::get('id_fanpage');
 
         $fb = new Facebook([
-            'app_id' => '291068905736984',
-            'app_secret' => '6e16c113b403044180cd88649dc7473e',
-            'default_graph_version' => 'v7.0',
+            'app_id' => '435930977474330',
+            'app_secret' => '8faf7d2190cc66e016e3c4a07ea6fd54',
+            'default_graph_version' => 'v2.10',
         ]);
 
         $param = array(
