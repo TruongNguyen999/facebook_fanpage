@@ -57,7 +57,7 @@ class FanpageController extends Controller
 
         if (isset($path)) {
             try {
-                $objPHPExcel = PHPExcel_IOFactory::load(public_path('storage/app/' . $path));
+                $objPHPExcel = PHPExcel_IOFactory::load(base_path('storage/app/' . $path));
                 $provinceSheet = $objPHPExcel->setActiveSheetIndex(0);
                 // RyjfrPvdL3S3OgPsNbR44k0ja0wxFlUWnxJWuiFi.xlsx
                 // KmZYMeQPZb3DNFCNCydOaxXfUreF1LHNuX0ykgsa.xlsx
