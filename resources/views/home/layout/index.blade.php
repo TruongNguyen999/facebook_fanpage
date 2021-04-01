@@ -54,6 +54,7 @@
                             <div>Đăng bài theo Excel</div>
                             <div class="btn btn-mdb-color btn-rounded">
                                 <input type="file" name="excel">
+                                <!-- {{$errors->first('excel')}} -->
                             </div>
                         </div>
                         <div>
