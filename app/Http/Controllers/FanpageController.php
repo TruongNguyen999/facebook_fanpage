@@ -22,7 +22,7 @@ class FanpageController extends Controller
     public function detail_fanpage($id)
     {
         $access_token =  Session::get('fb_access_token');
-        $res = Http::withToken($access_token)->get('https://graph.facebook.com/' . $id . '/feed?fields=id,picture,message,is_published,comments')->json();
+        $res = Http::withToken($access_token)->get('https://graph.facebook.com/' . $id . '/feed?fields=id,picture,message,is_published,comments,attachments{subattachments}')->json();
         $resName = Http::withToken($access_token)->get('https://graph.facebook.com/' . $id)->json();
 
         $data = $res['data'];
