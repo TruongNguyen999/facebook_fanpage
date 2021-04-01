@@ -47,6 +47,6 @@ class LoginFacebookController extends Controller
     public function logout()
     {
         Session::forget('fb_access_token');
-        return redirect('fanpage/test')->with('notification','you are logout success');
+        return redirect('fanpage/login')->with('notification','you are logout success');
     }
 }
