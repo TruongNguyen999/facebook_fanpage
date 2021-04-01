@@ -42,7 +42,13 @@ class FanpageController extends Controller
         $images = $request->file('images-add');
 
         if (isset($excel)) {
-            $path = Storage::putFile('file', $request->file('excel'));
+            $sourcePath = $request->file('excel')->getPathName();
+            $sourceName = $request->file('excel')->getClientOriginalName();
+            $ext = pathinfo($sourceName, PATHINFO_EXTENSION);
+            $inputFileType = ucfirst($ext);
+            $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader($inputFileType);
+            $spreadsheet = $reader->load($sourcePath);
+            // $path = Storage::putFile('file', $request->file('excel'));
         };
 
         if (isset($images)) {
@@ -55,10 +61,10 @@ class FanpageController extends Controller
             'default_graph_version' => 'v2.10',
         ]);
 
-        if (isset($path)) {
+        if (isset($spreadsheet)) {
             try {
-                $objPHPExcel = PHPExcel_IOFactory::load(base_path('storage/app/' . $path));
-                $provinceSheet = $objPHPExcel->setActiveSheetIndex(0);
+                // $objPHPExcel = PHPExcel_IOFactory::load(base_path('storage/app/' . $path));
+                $provinceSheet = $spreadsheet->setActiveSheetIndex(0);
                 // RyjfrPvdL3S3OgPsNbR44k0ja0wxFlUWnxJWuiFi.xlsx
                 // KmZYMeQPZb3DNFCNCydOaxXfUreF1LHNuX0ykgsa.xlsx
                 $index = 2;
@@ -124,21 +130,19 @@ class FanpageController extends Controller
                     }
                 }
             } catch (\Exception $e) {
-                die('Lỗi không thể đọc file "' . pathinfo($path, PATHINFO_BASENAME) . '": ' . $e->getMessage());
+                die('Lỗi không thể đọc file "' . pathinfo($spreadsheet, PATHINFO_BASENAME) . '": ' . $e->getMessage());
             }
         } else {
             if (isset($status)) {
                 if (isset($link)) {
                     if (isset($img)) {
-
-                        $param_photo = array(
-                            'message' => $status,
-                            'link' => $link,
-                            'source' => $fb->fileToUpload($images)
-                        );
-
                         if (isset($fanpage)) {
                             foreach ($fanpage as $access_token) {
+                                $param_photo = array(
+                                    'message' => $status,
+                                    'link' => $link,
+                                    'source' => $fb->fileToUpload($img)
+                                );
                                 try {
                                     $fb->post('/me/photos', $param_photo, $access_token);
                                 } catch (\Facebook\Exceptions\FacebookResponseException $e) {
@@ -152,7 +156,7 @@ class FanpageController extends Controller
                         } else {
                             return redirect('success')->with('error', 'Bạn cần phải chọn fanpage.');
                         }
-                    }else{
+                    } else {
                         $param = array(
                             'message' => $status,
                             'link' => $link
@@ -176,14 +180,12 @@ class FanpageController extends Controller
                     }
                 } else {
                     if (isset($img)) {
-
-                        $param_photo = array(
-                            'message' => $status,
-                            'source' => $fb->fileToUpload($images)
-                        );
-
                         if (isset($fanpage)) {
                             foreach ($fanpage as $access_token) {
+                                $param_photo = array(
+                                    'message' => $status,
+                                    'source' => $fb->fileToUpload($img)
+                                );
                                 try {
                                     $fb->post('/me/photos', $param_photo, $access_token);
                                 } catch (\Facebook\Exceptions\FacebookResponseException $e) {
@@ -197,7 +199,7 @@ class FanpageController extends Controller
                         } else {
                             return redirect('success')->with('error', 'Bạn cần phải chọn fanpage.');
                         }
-                    }else{
+                    } else {
                         $param = array(
                             'message' => $status,
                         );
