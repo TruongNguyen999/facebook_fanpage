@@ -228,14 +228,13 @@ class FanpageController extends Controller
     public function edit($id)
     {
         $access_token =  Session::get('fb_access_token');
-        $getEdit = Http::withToken($access_token)->get('https://graph.facebook.com/' . $id . '?fields=id,picture,message,comments,is_published')->json();
+        $getEdit = Http::withToken($access_token)->get('https://graph.facebook.com/' . $id . '?fields=id,picture,message,comments,is_published,attachments{subattachments}')->json();
         return response()->json(['data' => $getEdit]);
     }
     public function edit_post(Request $request)
     {
         $status = $request->statusEdit;
         $id = $request->id;
-        $link = $request->linkEdit;
 
         $access_token =  Session::get('fb_access_token');
 
@@ -246,38 +245,21 @@ class FanpageController extends Controller
         ]);
 
         if (isset($status)) {
-            if (isset($link)) {
-                $param = array(
-                    'message' => $status,
-                    'link' => $link
-                );
+            $param = array(
+                'message' => $status
+            );
 
-                try {
-                    $fb->post($id, $param, $access_token);
-                } catch (\Facebook\Exceptions\FacebookResponseException $e) {
-                    echo 'Graph returned an error: ' . $e->getMessage();
-                    exit;
-                } catch (\Facebook\Exceptions\FacebookSDKException $e) {
-                    echo 'Facebook SDK returned an error: ' . $e->getMessage();
-                    exit;
-                }
-            } else {
-                $param = array(
-                    'message' => $status
-                );
-
-                try {
-                    $fb->post($id, $param, $access_token);
-                } catch (\Facebook\Exceptions\FacebookResponseException $e) {
-                    echo 'Graph returned an error: ' . $e->getMessage();
-                    exit;
-                } catch (\Facebook\Exceptions\FacebookSDKException $e) {
-                    echo 'Facebook SDK returned an error: ' . $e->getMessage();
-                    exit;
-                }
+            try {
+                $fb->post($id, $param, $access_token);
+            } catch (\Facebook\Exceptions\FacebookResponseException $e) {
+                echo 'Graph returned an error: ' . $e->getMessage();
+                exit;
+            } catch (\Facebook\Exceptions\FacebookSDKException $e) {
+                echo 'Facebook SDK returned an error: ' . $e->getMessage();
+                exit;
             }
         } else {
-            return redirect('success')->with('error', 'Bạn cần phải thêm status cho bài đăng của mình. picture và link không nhất thiết phải có!');
+            return redirect('success')->with('error', 'Status chưa được chỉnh sửa!');
         }
 
         return redirect('success')->with('success', 'Bạn đã sửa bài thành công.');

@@ -57,6 +57,6 @@ session_start();
     Session::put('fb_access_token', $TestSession);
 
     if(isset($accessToken)){
-        echo "<script>location.href='https://facebook-app01.herokuapp.com/success'</script>";
+        echo "<script>location.href='https://localhost:8081/public/success'</script>";
     }
 @endphp

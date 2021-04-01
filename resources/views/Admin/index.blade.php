@@ -33,13 +33,19 @@
                 </div>
             </div>
             <div class="row" style="margin-left:0px;margin-right:0px">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="justify-content: center;text-align:center">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="justify-content: left;text-align:left">
+                    @if(isset($status['attachments']['data'][0]['subattachments']['data']))
+                    @foreach($status['attachments']['data'][0]['subattachments']['data'] as $img)
+                            <img src="{{$img['media']['image']['src']}}" width="350px" height="300px" alt="" style="border-radius:5px; margin: 5px; box-shadow: 3px 3px 8px 0px rgba(0,0,0,0.3)"  />
+                        @endforeach
+                    @else
                     @if(isset($status['full_picture']))
-                    <img src="{{$status['full_picture']}}" alt="">
+                    <img src="{{$status['full_picture']}}" width="350px" height="300px" alt="" style="border-radius:5px;margin: 5px; box-shadow: 3px 3px 8px 0px rgba(0,0,0,0.3)" alt="">
+                    @endif
                     @endif
                 </div>
             </div>
-            <hr />
+            <hr class="my-4" />
         </div>
         @endforeach
 

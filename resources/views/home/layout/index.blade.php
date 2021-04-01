@@ -96,18 +96,11 @@
                         </div>
                         <div>
                             <p>Trạng thái</p>
-                            <textarea name="statusEdit" id="statusEdit" style="border-radius: 10px; outline: none" cols="60" rows="5"></textarea>
+                            <textarea name="statusEdit" id="statusEdit" style="border-radius: 10px; outline: none" cols="60" rows="10"></textarea>
                         </div>
                         <div class="justify-content mt-4">
                             <div>Images</div>
-                            <div class="btn btn-mdb-color btn-rounded">
-                                <img src="" id="imgEdit" alt="">
-                            </div>
-                        </div>
-                        <div class="justify-content mt-4">
-                            <div>Link</div>
-                            <div class="btn btn-mdb-color btn-rounded">
-                                <input type="text" id="linkEdit" name="linkEdit" style="border: none; border-bottom: 1px solid #e06363; width:440px; outline: none">
+                            <div class="btn btn-mdb-color btn-rounded" id="imgEdit">
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -233,8 +226,18 @@
                     success: function(res) {
                         $('#id').val(res.data.id);
                         $('#statusEdit').val(res.data.message);
+                        let text = '';
                         let image = document.getElementById('imgEdit');
-                        image.src = res.data.picture;
+                        if (res.data.attachments) {
+                            if (res.data.attachments.data[0].subattachments.data !== '') {
+                                for (let imgs of res.data.attachments.data[0].subattachments.data) {
+                                    text += "<img src=" + imgs.media.image.src + " style='margin: 5px; box-shadow: 3px 3px 8px 0px rgba(0,0,0,0.3)' width='50px' height='50px' alt />"
+                                }
+                            }
+                        } else {
+                            text += "<img src="+res.data.picture+" style='margin: 5px; box-shadow: 3px 3px 8px 0px rgba(0,0,0,0.3)' width='50px' height='50px' alt />"
+                        }
+                        image.innerHTML = text;
                         if (res.data.picture !== '') {
                             $('#linkEdit').val(res.data.picture);
                         }

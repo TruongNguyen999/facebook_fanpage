@@ -41,11 +41,18 @@
         @include('home.layout.menu')
         <div id="layoutSidenav_content">
             <main>
-                <div class="container-fluid">
-                        @yield('content')
+                <div class="container-fluid" style="background: #1c1e21;color:white">
+                    @yield('content')
                 </div>
             </main>
-            @include('home.layout.footer')
+            <footer class="py-4 mt-auto" style="background: #1c1e21;color:white">
+                <div class="container-fluid" style="background: #1c1e21;color:white">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">Nguyễn Nhựt Trường - Trần Hiến Thanh Thanh Báo Cáo Thực Tập &copy; {{date('Y')}}</div>
+                    </div>
+                </div>
+            </footer>
+
         </div>
     </div>
     <script src="js/jquery.min.js"></script>
@@ -70,12 +77,13 @@
                     success: function(res) {
                         document.getElementById('img-opacity').style.opacity = '0.4';
                         document.getElementById('model_img_display').style.display = 'flex';
-                        document.getElementById('model_img').style.backgroundImage = "url("+res.img+")";
+                        document.getElementById('model_img').style.backgroundImage = "url(" + res.img + ")";
                     }
                 });
             });
         });
-        function display_album(){
+
+        function display_album() {
             document.getElementById('model_img_display').style.display = 'none';
             document.getElementById('img-opacity').style.opacity = '1';
         }
