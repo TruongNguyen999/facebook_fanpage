@@ -48,6 +48,7 @@ class FanpageController extends Controller
             $inputFileType = ucfirst($ext);
             $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader($inputFileType);
             $spreadsheet = $reader->load($sourcePath);
+            $spreadsheet->getActiveSheet();
             // $path = Storage::putFile('file', $request->file('excel'));
         };
 
