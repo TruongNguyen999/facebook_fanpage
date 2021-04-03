@@ -36,6 +36,8 @@ Route::get('/detail_fanpage/{id}','FanpageController@detail_fanpage');
 
 Route::post('/poststatus','FanpageController@poststatus');
 
+Route::post('/upload','FanpageController@upload');
+
 Route::get('/edit/{id}','FanpageController@edit');
 
 Route::post('/edit_post','FanpageController@edit_post');

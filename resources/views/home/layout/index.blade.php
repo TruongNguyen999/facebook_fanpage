@@ -12,6 +12,12 @@
     <link href="css/styles.css" rel="stylesheet" />
     <!-- <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
     <script src="js/all.min.js" crossorigin="anonymous"></script>
+    <style>
+        .file_upload:hover {
+            color: white !important;
+            background: blue !important;
+        }
+    </style>
     @php
     $count_fanpage = Session::get('count_fanpage');
     $count_comment = Session::get('count_comment');
@@ -45,10 +51,8 @@
                             </div>
                         </div>
                         <div class="justify-content mt-4">
-                            <div>Chọn hình ảnh đăng</div>
-                            <div class="btn btn-mdb-color btn-rounded">
-                                <input type="file" name="images-add">
-                            </div>
+                            <div>Ảnh được bạn tải lênh</div>
+                            <div id="list_upload"></div>
                         </div>
                         <div class="justify-content mt-4">
                             <div>Đăng bài theo Excel</div>
@@ -73,6 +77,15 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
                             <button type="submit" class="btn btn-primary">Đăng Bài</button>
+                        </div>
+                    </form>
+                    <form action="" data-url="{{url('/upload')}}" id="formupload" class="formtest" method="post" role="form" enctype="multipart/form-data">
+                        <input type="hidden" name="_token" value="{{csrf_token()}}">
+                        <div class="justify-content">
+                            <div class="btn btn-mdb-color btn-rounded">
+                                <input type="file" name="upload" id="file">
+                                <button type="submit" class="btn btn-primary file_upload" style="background:none;color:blue;outline:none">tải lên</button>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -209,10 +222,32 @@
     <script src="assets/demo/chart-bar-demo.js"></script>
     <script src="js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
     <script src="assets/demo/datatables-demo.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.slim.js"></script> -->
     <script>
         setTimeout(() => {
             document.getElementById('alert').style.display = 'none';
         }, 5000);
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#formupload').on('submit', function(e) {
+                e.preventDefault();
+                var url = $(this).attr('data-url');
+                $.ajax({
+                    method: 'post',
+                    url: url,
+                    data: new FormData(this),
+                    contentType: false,
+                    processData: false,
+                    success: function(res) {
+                        $('#list_upload').append(res)
+                        $('#file').val('')
+                    }
+                });
+            });
+        });
     </script>
     <script type="text/javascript">
         $(document).ready(function() {
@@ -235,7 +270,7 @@
                                 }
                             }
                         } else {
-                            text += "<img src="+res.data.picture+" style='margin: 5px; box-shadow: 3px 3px 8px 0px rgba(0,0,0,0.3)' width='50px' height='50px' alt />"
+                            text += "<img src=" + res.data.picture + " style='margin: 5px; box-shadow: 3px 3px 8px 0px rgba(0,0,0,0.3)' width='50px' height='50px' alt />"
                         }
                         image.innerHTML = text;
                         if (res.data.picture !== '') {
