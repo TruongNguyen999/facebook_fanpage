@@ -42,6 +42,7 @@ class FanpageController extends Controller
         $images = $request->file('images-add');
 
         $ListImg = Session::get('photoIdArray');
+        $total_fanpage = Session::get('count_fanpage');
 
         if (isset($excel)) {
             $path = Storage::putFile('file', $request->file('excel'));
@@ -107,9 +108,8 @@ class FanpageController extends Controller
                         if (isset($fanpage)) {
                             foreach ($fanpage as $access_token) {
                                 $arr = array();
-                                $image = array();
                                 foreach ($ListImg as $idpage) {
-                                    if (count($idpage) == 3) {
+                                    if (count($idpage) == $total_fanpage) {
                                         foreach ($idpage as $k => $img) {
                                             $id_actoken = Http::withToken($access_token)->get('https://graph.facebook.com/me?fields=id')->json();
                                             if ($k == $id_actoken['id']) {
@@ -118,11 +118,10 @@ class FanpageController extends Controller
                                         }
                                     }
                                 }
-                                $image = (array)$image;
-                                array_push($image, $arr);
+
                                 $params = array("message" => $status, "link" => $link);
-                                for ($i = 0; $i < count($image[0]); $i++) {
-                                    $params["attached_media"][$i] = '{"media_fbid":"' . $image[0][$i] . '"}';
+                                for ($i = 0; $i < count($arr); $i++) {
+                                    $params["attached_media"][$i] = '{"media_fbid":"' . $arr[$i] . '"}';
                                 }
                                 try {
                                     $fb->post("me/feed", $params, $access_token);
@@ -142,9 +141,8 @@ class FanpageController extends Controller
                         if (isset($fanpage)) {
                             foreach ($fanpage as $access_token) {
                                 $arr = array();
-                                $image = array();
                                 foreach ($ListImg as $idpage) {
-                                    if (count($idpage) == 3) {
+                                    if (count($idpage) == $total_fanpage) {
                                         foreach ($idpage as $k => $img) {
                                             $id_actoken = Http::withToken($access_token)->get('https://graph.facebook.com/me?fields=id')->json();
                                             if ($k == $id_actoken['id']) {
@@ -153,11 +151,9 @@ class FanpageController extends Controller
                                         }
                                     }
                                 }
-                                $image = (array)$image;
-                                array_push($image, $arr);
                                 $params = array("message" => $status);
-                                for ($i = 0; $i < count($image[0]); $i++) {
-                                    $params["attached_media"][$i] = '{"media_fbid":"' . $image[0][$i] . '"}';
+                                for ($i = 0; $i < count($arr); $i++) {
+                                    $params["attached_media"][$i] = '{"media_fbid":"' . $arr[$i] . '"}';
                                 }
                                 try {
                                     $fb->post("me/feed", $params, $access_token);
