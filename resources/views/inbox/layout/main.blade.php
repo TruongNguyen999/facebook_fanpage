@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Dashboard - SB Admin</title>
+    <title>Tin nhắn</title>
     <base href="{{asset('')}}">
     <link href="css/styles.css" rel="stylesheet" />
     <link href="css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
@@ -34,7 +34,7 @@
                                 <div class="about">
                                     <div class="name">{{$name}}</div>
                                     <div class="status">
-                                        <i class="fa fa-circle online"></i> online
+                                        <i class="fa fa-circle online"></i> Đang hoạt động
                                     </div>
                                 </div>
                             </li>
@@ -53,7 +53,7 @@
                                             {{$inf['senders']['data'][0]['name']}}
                                         </div>
                                         <div class="status">
-                                            <i class="fa fa-circle online"></i> online
+                                            <i class="fa fa-circle online"></i> Đang hoạt động
                                         </div>
                                     </div>
                                 </a>

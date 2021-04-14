@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Dashboard - SB Admin</title>
+    <title>Bình Luận</title>
     <base href="{{asset('')}}">
     <link href="css/styles.css" rel="stylesheet" />
     <link href="css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
@@ -42,10 +42,8 @@
     $total = Session::get('total');
     @endphp
 </head>
-
 <body class="sb-nav-fixed">
     @include('home.layout.header')
-
     <div id="layoutSidenav">
         @include('home.layout.menu')
         <div id="layoutSidenav_content" style="min-height: calc(100vh - 96px);">
@@ -58,7 +56,7 @@
                                 <div class="about">
                                     <div class="name">{{$name}}</div>
                                     <div class="status">
-                                        <i class="fa fa-circle online"></i> {{$total}} comment
+                                        <i class="fa fa-circle online"></i> {{$total}} bình luận
                                     </div>
                                 </div>
                             </li>
@@ -78,7 +76,7 @@
                                             {{$comment['data'][$i]['message']}}
                                         </div>
                                         <div class="status">
-                                            <i class="fa fa-circle online"></i> {{count($comment['data'][$i]['comments']['data'])}} comment
+                                            <i class="fa fa-circle online"></i> {{count($comment['data'][$i]['comments']['data'])}} bình luận
                                         </div>
                                     </div>
                                 </a>

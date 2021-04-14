@@ -6,10 +6,10 @@
             <thead>
                 <tr style="text-align:center;">
                     <!-- <th>ID</th> -->
-                    <th>Image</th>
-                    <th>Message</th>
-                    <th>Comments/Created_time</th>
-                    <th>Action</th>
+                    <th>Hình Ảnh</th>
+                    <th>Trạng Thái</th>
+                    <th>Bình Luận/Ngày Đăng</th>
+                    <th><i class="fas fa-edit"></i></th>
                 </tr>
             </thead>
             <tbody>

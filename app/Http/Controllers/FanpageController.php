@@ -39,7 +39,6 @@ class FanpageController extends Controller
         $fanpage = $request->fanpage;
         $link = $request->link;
         $excel = $request->file('excel');
-        $images = $request->file('images-add');
 
         $ListImg = Session::get('photoIdArray');
         $total_fanpage = Session::get('count_fanpage');

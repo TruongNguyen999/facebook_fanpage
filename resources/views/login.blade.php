@@ -35,11 +35,9 @@
         'app_secret' => env('FACEBOOK_APP_SECRET'),
         'default_graph_version' => 'v2.10',
     ]);
-
     $helper = $fb->getRedirectLoginHelper();
-
     $permissions = ['public_profile,email,pages_show_list,pages_manage_posts,pages_read_engagement,pages_manage_metadata,pages_messaging,pages_messaging_subscriptions,read_page_mailboxes,user_posts,user_likes,user_status,user_friends'];
-    $loginUrl = $helper->getLoginUrl('https://facebook-app01.herokuapp.com/fb-callback', $permissions);
+    $loginUrl = $helper->getLoginUrl('https://localhost:8081/public/fb-callback', $permissions);
     @endphp
 </head>
 

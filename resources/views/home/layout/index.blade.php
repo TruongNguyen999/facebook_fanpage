@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Dashboard - SB Admin</title>
+    <title>Admin</title>
     <base href="{{asset('')}}">
     <link href="css/styles.css" rel="stylesheet" />
     <!-- <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
@@ -112,13 +112,13 @@
                             <textarea name="statusEdit" id="statusEdit" style="border-radius: 10px; outline: none" cols="60" rows="10"></textarea>
                         </div>
                         <div class="justify-content mt-4">
-                            <div>Images</div>
+                            <div>Hình Ảnh</div>
                             <div class="btn btn-mdb-color btn-rounded" id="imgEdit">
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Edit</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
+                            <button type="submit" class="btn btn-primary">Cập Nhật</button>
                         </div>
                     </form>
                 </div>
@@ -137,11 +137,11 @@
                     @if(Session('success'))
                     <div id="alert" class="alert alert-success mt-4">{{Session('success')}}</div>
                     @endif
-                    <h1 class="mt-4">{{('WELCOME TO ADMIN DASHBOARD')}}</h1>
+                    <h1 class="mt-4">{{('')}}</h1>
                     <div class="row">
                         <div class="col-xl-3 col-md-6">
                             <div class="card bg-primary text-white mb-4">
-                                <div class="card-body">Total Fanpage</div>
+                                <div class="card-body">Tổng trang</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
                                     <span class="small text-white stretched-link">
                                         @if(isset($count_fanpage))
@@ -155,7 +155,7 @@
                         </div>
                         <div class="col-xl-3 col-md-6">
                             <div class="card bg-warning text-white mb-4">
-                                <div class="card-body">Total Post</div>
+                                <div class="card-body">Tổng bài đăng</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
                                     <span class="small text-white stretched-link">
                                         @if(isset($count_comment))
@@ -169,20 +169,20 @@
                         </div>
                         <div class="col-xl-3 col-md-6">
                             <div class="card bg-success text-white mb-4">
-                                <div class="card-body">Success Card</div>
+                                <div class="card-body">Thẻ</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" href="#">View Details</a>
+                                    <a class="small text-white stretched-link" href="#">Xem chi tiết</a>
                                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xl-3 col-md-6">
                             <div class="card bg-danger text-white mb-4">
-                                <div class="card-body">fanpage information</div>
+                                <div class="card-body">Thông tin trang</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between" style="height: 44px;">
                                     <div class="dropdown">
                                         <span class="btn btn-secondary dropdown-toggle btn-sm" style="background: none; border:none" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            select fanpage
+                                            Tìm kiếm trang
                                         </span>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                             @foreach($inf_fanpage->data as $ifo)
@@ -200,7 +200,7 @@
                             @if(isset($Name_Fanpage))
                             <span>{{$Name_Fanpage}}</span>
                             @else
-                            <span>Fanpage</span>
+                            <span>Trang</span>
                             @endif
                         </div>
                         @yield('content')

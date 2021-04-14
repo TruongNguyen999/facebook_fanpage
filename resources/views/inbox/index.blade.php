@@ -106,26 +106,24 @@
             @endif
 
         </ul>
-
     </div> <!-- end chat-history -->
-
     <div class="chat-message clearfix d-flex" style="height: 130px">
         <form action="{{url('/postInbox')}}" method="POST" role="form" enctype="multipart/form-data" style="display: flex;width:100%">
             @csrf
             @if(isset($mess))
             @if($mess['data'][0]['from']['name'] == 'Đồng hồ giá rẻ' || $mess['data'][0]['from']['name'] == 'ThucTap_Optimus')
             <input type="text" name="id" style="display: none;" value="{{$mess['data'][0]['to']['data'][0]['id']}}">
-            <input style="outline: none;border:none;height:60px;width:100%" name="valueSend" id="message-to-send" placeholder="Type your message" />
-            <button type="submit">Send</button>
+            <input style="outline: none;border:none;height:60px;width:100%" name="valueSend" id="message-to-send" placeholder="Nhập tin nhắn" />
+            <button type="submit">Gửi</button>
             @else
             <input type="text" name="id" style="display: none;" value="{{$mess['data'][0]['from']['id']}}">
-            <input style="outline: none;border:none;height:60px;width:100%" name="valueSend" id="message-to-send" placeholder="Type your message" />
-            <button type="submit">Send</button>
+            <input style="outline: none;border:none;height:60px;width:100%" name="valueSend" id="message-to-send" placeholder="Nhập tin nhắn" />
+            <button type="submit">Gửi</button>
             @endif
             @else
             <input type="text" name="id" style="display: none;" value="{{$inforCustomer[0]['senders']['data'][0]['id']}}">
-            <input style="outline: none;border:none;height:60px;width:100%" name="valueSend" id="message-to-send" placeholder="Type your message" />
-            <button type="submit">Send</button>
+            <input style="outline: none;border:none;height:60px;width:100%" name="valueSend" id="message-to-send" placeholder="Nhập tin nhắn" />
+            <button type="submit">Gửi</button>
             @endif
         </form>
     </div> <!-- end chat-message -->

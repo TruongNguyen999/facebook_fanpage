@@ -1,11 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
 use Facebook\Facebook;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\View;
+
 class LoginFacebookController extends Controller
 {
     public function index(){

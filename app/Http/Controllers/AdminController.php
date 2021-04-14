@@ -1,9 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
-use Facebook\Facebook;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Http;
 
