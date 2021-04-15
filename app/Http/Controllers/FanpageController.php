@@ -12,7 +12,9 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 use PHPExcel_IOFactory;
 use PHPExcel;
 use Illuminate\Support\Facades\Storage;
-
+// https://facebook-app01.herokuapp.com/public/success
+//https://localhost:8081/public/success
+// https://localhost:8081/fb-callback
 class FanpageController extends Controller
 {
     public function index()

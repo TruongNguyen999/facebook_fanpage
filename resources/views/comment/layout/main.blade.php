@@ -42,6 +42,7 @@
     $total = Session::get('total');
     @endphp
 </head>
+
 <body class="sb-nav-fixed">
     @include('home.layout.header')
     <div id="layoutSidenav">
@@ -73,7 +74,9 @@
                                     @endif
                                     <div class="about">
                                         <div class="name">
-                                            {{$comment['data'][$i]['message']}}
+                                            @if(isset($comment['data'][$i]['message']))
+                                                {{$comment['data'][$i]['message']}}
+                                            @endif
                                         </div>
                                         <div class="status">
                                             <i class="fa fa-circle online"></i> {{count($comment['data'][$i]['comments']['data'])}} bình luận

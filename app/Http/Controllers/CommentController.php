@@ -70,7 +70,12 @@ class CommentController extends Controller
             $img = '';
         }
 
-        $mess = $res['message'];
+        if(isset($res['message'])){
+            $mess = $res['message'];
+        }else{
+            $mess = '';
+        }
+
         $comment_detail = $res['comments']['data'];
 
         return view('comment.index', compact('img', 'mess', 'comment_detail'));
