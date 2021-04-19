@@ -48,6 +48,17 @@ $inf_fanpage = Session::get('nodefanpage');
                     <div class="sb-nav-link-icon"><i class="fas fa-images"></i></div>
                     Album Ảnh
                 </a>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Json" aria-expanded="false" aria-controls="collapsePages">
+                    <div class="sb-nav-link-icon"><i class="fas fa-object-ungroup"></i></div>
+                    Xuất Json
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse" id="Json" aria-labelledby="headingTwo" data-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                        <a class="nav-link" data-target="#jsonCode" data-toggle="modal" onclick="togalAdmin()"><i class="fas fa-house-return"></i>&nbsp;Tường Nhà</a>
+                        <a class="nav-link" data-target="#jsonCode" data-toggle="modal" onclick="togalFanpage()"><i class="fas fa-house-return"></i>&nbsp;Fanage</a>
+                    </nav>
+                </div>
             </div>
         </div>
         <div class="sb-sidenav-footer">
@@ -56,15 +67,21 @@ $inf_fanpage = Session::get('nodefanpage');
         </div>
     </nav>
 </div>
-
 <script>
-    if(window.location.href === 'https://localhost:8081/public/success'){
+    function togalAdmin() {
+        document.getElementById('json_admin').style.display = 'flex'
+        document.getElementById('json_fanpage').style.display = 'none'
+    }
+    function togalFanpage(){
+        document.getElementById('json_fanpage').style.display = 'flex'
+        document.getElementById('json_admin').style.display = 'none'
+    }
+</script>
+<script>
+    if (window.location.href === window.location.origin + '/public/success') {
         document.getElementById('showPost').style.display = 'flex';
     }
-    if(window.location.href === 'https://facebook-app01.herokuapp.com/success'){
-        document.getElementById('showPost').style.display = 'flex';
-    }
-    if(window.location.href === 'http://facebook-app01.herokuapp.com/success'){
+    if (window.location.href === window.location.origin + '/success') {
         document.getElementById('showPost').style.display = 'flex';
     }
 </script>

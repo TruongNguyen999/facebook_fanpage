@@ -13,18 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get('/test', FUNCTION () {
-    return view('test');
-});
+// Route::get('/test', FUNCTION () {
+//     return view('test');
+// });
 
-Route::group(['prefix'=>'fanpage'],function()
-{
-    Route::get('/login','FanpageController@index');
-});
+// Route::group(['prefix'=>'fanpage'],function()
+// {
+//     Route::get('/','FanpageController@index');
+// });
+Route::get('/','FanpageController@index');
 
 Route::get('/fb-callback', 'LoginFacebookController@index');
 
@@ -61,3 +62,9 @@ Route::get('/status_admin','AdminController@status_admin');
 Route::get('/album_admin','AdminController@album_admin');
 
 Route::get('/detail_album/{id}','AdminController@detail_album');
+
+Route::post('/getcode','MailController@getCode');
+
+Route::post('/json_admin','MailController@getJson_admin');
+
+Route::post('/json_fanpage','MailController@getJson_fanpage');

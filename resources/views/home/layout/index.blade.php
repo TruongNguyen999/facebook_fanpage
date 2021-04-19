@@ -7,10 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <title>Admin</title>
     <base href="{{asset('')}}">
     <link href="css/styles.css" rel="stylesheet" />
-    <!-- <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
     <script src="js/all.min.js" crossorigin="anonymous"></script>
     <style>
         .file_upload:hover {
@@ -125,6 +125,46 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="jsonCode" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="" data-url="{{url('/getcode')}}" id="getcode" class="formtest" method="post" role="form" enctype="multipart/form-data">
+                        @csrf
+                        <div class="justify-content">
+                            <div class="btn btn-mdb-color btn-rounded" style="width: 466px;">
+                                <input type="text" name="email" id="email" style="width: 330px;">
+                                <button type="submit" class="btn btn-secondary">Nhận Mã</button>
+                            </div>
+                            <div id="alertgetcode" style="display: none;">"Gửi mã thành công!"</div>
+                        </div>
+                    </form>
+                    <form action="" data-url="{{url('/json_admin')}}" id="json_admin" class="formtest mt-4" method="post" role="form" enctype="multipart/form-data">
+                        @csrf
+                        <div class="justify-content">
+                            <div class="btn btn-mdb-color btn-rounded" style="width: 466px;">
+                                <input type="text" name="confirm" id="confirm" style="width: 330px;">
+                                <button type="submit" class="btn btn-primary">Xác Nhận</button>
+                            </div>
+                        </div>
+                    </form>
+                    <form action="" data-url="{{url('/json_fanpage')}}" id="json_fanpage" class="formtest mt-4" method="post" role="form" enctype="multipart/form-data">
+                        @csrf
+                        <div class="justify-content">
+                            <div class="btn btn-mdb-color btn-rounded" style="width: 466px;">
+                                <input type="text" name="confirm" id="confirm" style="width: 330px;">
+                                <button type="submit" class="btn btn-primary">Xác Nhận</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
     <div id="layoutSidenav">
         @include('home.layout.menu')
@@ -222,9 +262,6 @@
     <script src="assets/demo/chart-bar-demo.js"></script>
     <script src="js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
     <script src="assets/demo/datatables-demo.js"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.slim.js"></script> -->
     <script>
         setTimeout(() => {
             document.getElementById('alert').style.display = 'none';
@@ -232,12 +269,90 @@
     </script>
     <script type="text/javascript">
         $(document).ready(function() {
+            $('#getcode').on('submit', function(e) {
+                e.preventDefault();
+                var url = $(this).attr('data-url');
+                $.ajax({
+                    method: 'post',
+                    url,
+                    data: new FormData(this),
+                    contentType: false,
+                    processData: false,
+                    success: function(res) {
+                        if (res.data) {
+                            document.getElementById("alertgetcode").style.display = "flex"
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#json_admin').on('submit', function(e) {
+                e.preventDefault();
+                var url = $(this).attr('data-url');
+                $.ajax({
+                    method: 'post',
+                    url,
+                    data: new FormData(this),
+                    contentType: false,
+                    processData: false,
+                    dataType: "json",
+                    success: function(res) {
+                        if (res.Admin) {
+                            document.getElementById('alertgetcode').style.display = 'none'
+                            $('#confirm').val('')
+                            let url = $(this).attr('href');
+                            let mywindow =  window.open(url, '_blank');
+                            mywindow.document.write('<htm><body><pre>'+JSON.stringify(res.Admin,null,2)+'</pre></body></htm>')
+                        }
+                        if(res.error){
+                            alert(res.error)
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#json_fanpage').on('submit', function(e) {
+                e.preventDefault();
+                var url = $(this).attr('data-url');
+                $.ajax({
+                    method: 'post',
+                    url,
+                    data: new FormData(this),
+                    contentType: false,
+                    processData: false,
+                    dataType: "json",
+                    success: function(res) {
+                        if (res.Comment && res.Inbox) {
+                            document.getElementById('alertgetcode').style.display = 'none'
+                            $('#confirm').val('')
+                            let data = JSON.stringify(res.Comment,null,2)+JSON.stringify(res.Inbox,null,2)
+                            let url = $(this).attr('href')
+                            let mywindow =  window.open(url, '_blank')
+                            mywindow.document.write('<htm><body><pre>'+data+'</pre></body></htm>')
+                        }
+                        if(res.error){
+                            alert(res.error)
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
             $('#formupload').on('submit', function(e) {
                 e.preventDefault();
                 var url = $(this).attr('data-url');
                 $.ajax({
                     method: 'post',
-                    url: url,
+                    url,
                     data: new FormData(this),
                     contentType: false,
                     processData: false,
